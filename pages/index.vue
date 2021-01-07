@@ -1,13 +1,38 @@
 <template>
   <div class="container">
-    <p>Hello World</p>
-    <hr>
-    <router-link to="/price">Price page</router-link>
+    <div>
+      <p>Hello World</p>
+      <hr>
+      <router-link to="/price">Price page</router-link>
+    </div>
+    <div>
+      <ul v-for="user in users" :key="user.id">
+        <li>{{ user.id }},{{ user.name }} </li><p>{{ user.company.name}}</p>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+const axios = require('axios')
+let url = 'https://jsonplaceholder.typicode.com/usersxxxx'
+export default {
+  data() {
+    return {
+      users:[]
+    }
+  },
+  // asyncDataメソッドはNuxt.jsのメソッド
+  asyncData({ params, error }) {
+    return axios.get(url)
+    .then((res) => { //resにはサーバーから取得したデータが入っている
+      return { users: res.data }
+    })
+    .catch((e => {
+      error({ users: e.response.status, message: 'Error' }) //非同期通信のエラー処理
+    }))
+  }
+}
 </script>
 
 <style>
