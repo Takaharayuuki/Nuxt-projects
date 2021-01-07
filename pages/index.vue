@@ -10,12 +10,13 @@
         <li>{{ user.id }},{{ user.name }} </li><p>{{ user.company.name}}</p>
       </ul>
     </div>
+    <img src="~/assets/sayu.jpg" alt="imgテスト">
   </div>
 </template>
 
 <script>
 const axios = require('axios')
-let url = 'https://jsonplaceholder.typicode.com/usersxxxx'
+let url = 'https://jsonplaceholder.typicode.com/users'
 export default {
   data() {
     return {
